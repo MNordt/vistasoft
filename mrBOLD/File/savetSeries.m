@@ -13,6 +13,8 @@ function savetSeries(tSeries,vw,scan,slice,nii)
 % vw, scan, & slice: Used only to determine the full path for the tSeries file.
 %
 % djh, 2/17/2001
+
+
 mrGlobals;
 
 if notDefined('scan'),  scan  = viewGet(vw, 'curScan'); end
@@ -27,8 +29,11 @@ if strcmp(viewType,'Inplane')
     if ~exist(fullfile(tseriesdir),'dir')
         mkdir(tseriesdir);
     end
-
-    pathStr = fullfile(tseriesdir,['tSeriesScan',num2str(scan),'.nii.gz']);
+%--- changes made to set local paths to the dataTYPES struct, MN 12/18----%
+    %pathStr = fullfile(tseriesdir,['tSeriesScan',num2str(scan),'.nii.gz']);
+        curDt = viewGet(vw,'Cur Dt'); % moved this up, see below
+    pathStr = fullfile(viewType,dataTYPES(curDt).name, 'TSeries',['tSeriesScan',num2str(scan),'.nii.gz']);
+%-------------------------------------------------------------------------%
     
     %Let's also make sure that the dataTYPES are updated properly
     %First, check if this datatype exists

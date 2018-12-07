@@ -789,19 +789,26 @@ function h = fileFullPath(h)
 nScans  = length(h.sParams);
 homeDir = viewGet(h.vw,'homeDir');
 
+%-----------changed these paths to local paths, MN 12/18----===========---%
 for ii=1:nScans
 
     [p,n,e] = fileparts(h.sParams(ii).imFile);
-    h.sParams(ii).imFile = fullfile(homeDir,'Stimuli',[n,e]);
+    %h.sParams(ii).imFile = fullfile(homeDir,'Stimuli',[n,e]);
+    h.sParams(ii).imFile = fullfile('Stimuli',[n,e]);
 
     [p,n,e] = fileparts(h.sParams(ii).jitterFile);
-    h.sParams(ii).jitterFile = fullfile(homeDir,'Stimuli',[n,e]);
+    %h.sParams(ii).jitterFile = fullfile(homeDir,'Stimuli',[n,e]);
+    h.sParams(ii).jitterFile = fullfile('Stimuli',[n,e]);
+    
 
     [p,n,e] = fileparts(h.sParams(ii).paramsFile);
-    h.sParams(ii).paramsFile = fullfile(homeDir,'Stimuli',[n,e]);
+    %h.sParams(ii).paramsFile = fullfile(homeDir,'Stimuli',[n,e]);
+    h.sParams(ii).paramsFile = fullfile('Stimuli',[n,e]);
 end
 
 return;
+%-------------------------------------------------------------------------%
+
 
 function setScanSlider(hObject, nScans)
 
